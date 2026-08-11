@@ -9,13 +9,20 @@ import challanRoutes from "./routes/challan.routes.js";
 
 const app = express();
 
-// CORS: allow all localhost in dev, FRONTEND_URL in production
+// CORS: allow localhost in dev + all production frontend URLs
+// FRONTEND_URL can be comma-separated: "https://a.vercel.app,https://custom-domain.com"
+const productionOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:4173",
   "http://localhost:3000",
-  process.env.FRONTEND_URL,
-].filter(Boolean) as string[];
+  "https://mini-erp-crm-portal-zeta.vercel.app", // known Vercel deployment
+  ...productionOrigins,
+];
 
 app.use(
   cors({
