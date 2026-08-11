@@ -35,7 +35,7 @@ export function Challans() {
     setError(null);
     try {
       const [challanRes, custRes, prodRes] = await Promise.all([
-        challanApi.getChallans(statusFilter ? { status: statusFilter } : undefined),
+        challanApi.getChallans(),
         customerApi.getCustomers({ limit: 100 }),
         productApi.getProducts({ limit: 100 }),
       ]);
