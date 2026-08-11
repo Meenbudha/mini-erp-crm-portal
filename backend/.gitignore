@@ -1,0 +1,55 @@
+# ========================
+# Dependencies
+# ========================
+node_modules/
+
+# ========================
+# Environment Variables
+# ========================
+.env
+.env.local
+.env.*.local
+# Keep example files (safe to commit)
+!.env.example
+
+# ========================
+# Build Output
+# ========================
+dist/
+build/
+
+# ========================
+# Prisma Generated Client
+# ========================
+src/generated/
+prisma/migrations/dev.db
+
+# ========================
+# Logs
+# ========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ========================
+# OS / Editor Files
+# ========================
+.DS_Store
+Thumbs.db
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.sw?
+
+# ========================
+# TypeScript Cache
+# ========================
+*.tsbuildinfo
+
+# ========================
+# Test Artifacts
+# ========================
+coverage/
