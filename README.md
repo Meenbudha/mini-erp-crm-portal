@@ -2,6 +2,11 @@
 
 Lightweight, full-stack ERP/CRM system built with **Node.js + Express + Prisma + PostgreSQL** on the backend and **React + Vite + TypeScript** on the frontend. Covers customer management, product catalog, stock inventory, and sales delivery challans with role-based access control.
 
+### 🌐 Live Application Links
+
+- 🚀 **Frontend App (Vercel)**: [https://mini-erp-crm-portal-zeta.vercel.app](https://mini-erp-crm-portal-zeta.vercel.app)
+- ⚡ **Backend API (Render)**: [https://mini-erp-crm-backend-v4j5.onrender.com/api](https://mini-erp-crm-backend-v4j5.onrender.com/api)
+
 ---
 
 ## Features
