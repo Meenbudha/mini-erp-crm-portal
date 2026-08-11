@@ -9,21 +9,23 @@ import challanRoutes from "./routes/challan.routes.js";
 
 const app = express();
 
-// CORS: allow localhost in dev, FRONTEND_URL in production
+// CORS: allow all localhost in dev, FRONTEND_URL in production
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:4173",
+  "http://localhost:3000",
   process.env.FRONTEND_URL,
 ].filter(Boolean) as string[];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow server-to-server requests (no origin) and allowed origins
+      // Allow server-to-server (no origin header) and whitelisted origins
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+        // Return false (block) instead of throwing — avoids Express 5 crash
+        callback(null, false);
       }
     },
     credentials: true,
