@@ -1,4 +1,7 @@
-﻿# Mini ERP + CRM Operations Portal
+# Mini ERP + CRM Operations Portal
+
+[![Backend CI](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/backend-ci.yml)
+[![Frontend CI](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/frontend-ci.yml)
 
 Lightweight, full-stack ERP/CRM system built with **Node.js + Express + Prisma + PostgreSQL** on the backend and **React + Vite + TypeScript** on the frontend. Covers customer management, product catalog, real-time stock inventory, and sales delivery challans â€” all with role-based access control.
 
@@ -503,7 +506,6 @@ When a challan is created, `productName`, `productSku`, and `unitPrice` are copi
 - PDF invoice export is not implemented.
 - Product image upload is not implemented.
 - Docker / `docker-compose` configuration is not included.
-- GitHub Actions CI/CD pipeline is not configured.
 - Advanced reporting, charts, and analytics are outside the current scope.
 - No email notifications for follow-up reminders or low-stock alerts.
 - No pagination on stock movement audit log (returns all records).
