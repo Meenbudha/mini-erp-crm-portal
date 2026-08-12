@@ -239,6 +239,8 @@ Challan ------+---- ChallanItem
 
 ## API Documentation
 
+> Full API reference is in **[API.md](./API.md)** - covers all 20 endpoints with request schemas, response shapes, error codes, query params, roles, and curl examples.
+
 All responses follow the envelope pattern:
 ```json
 { "success": true,  "data": { ... } }
