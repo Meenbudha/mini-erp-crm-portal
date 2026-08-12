@@ -9,14 +9,12 @@ node_modules/
 # (never commit real secrets)
 # ========================
 .env
-.env.local
-.env.*.local
-.env.production
+.env.*
 backend/.env
-frontend/.env.production
+frontend/.env
 # Keep example files (safe to commit)
 !**/.env.example
-!**/.env.production.example
+!**/.env.*.example
 
 # ========================
 # Build Output
@@ -25,12 +23,24 @@ dist/
 dist-ssr/
 build/
 backend/dist/
+frontend/dist/
 
 # ========================
-# Prisma Generated Client
+# Database & Prisma
 # ========================
 backend/src/generated/
 backend/prisma/migrations/dev.db
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+
+# ========================
+# API & Testing Tools
+# ========================
+.postman/
+coverage/
+.nyc_output/
 
 # ========================
 # Logs
@@ -53,8 +63,11 @@ Desktop.ini
 # ========================
 # Editor / IDE
 # ========================
-.vscode/
+.vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 .idea/
 *.suo
 *.ntvs*
@@ -64,17 +77,9 @@ Desktop.ini
 *.swp
 
 # ========================
-# TypeScript Cache
+# Cache & Temporary Files
 # ========================
 *.tsbuildinfo
-
-# ========================
-# Vite / Build Tools Cache
-# ========================
 .vite/
 .cache/
-
-# ========================
-# Test Artifacts
-# ========================
-coverage/
+.eslintcache
