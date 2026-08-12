@@ -98,6 +98,23 @@ Node.js + Express + TypeScript
           PostgreSQL Database
 ```
 
+### How the Server Was Set Up
+
+The backend is an **Express 5** HTTP server written in TypeScript, run via `tsx` (no build step needed in development).
+
+**Initialization order in `src/app.ts`:**
+1. `dotenv/config` is imported at the top of `src/server.ts` so all `process.env.*` values are available before anything else runs.
+2. A CORS policy is configured to whitelist `localhost:5173` (Vite dev), `localhost:4173` (Vite preview), and the production Vercel URL. Additional origins can be injected via the `FRONTEND_URL` environment variable (comma-separated).
+3. `express.json()` middleware parses incoming JSON request bodies.
+4. A `GET /api/health` route returns `200 OK` so deployment platforms and CI can verify the server started correctly.
+5. Domain route groups are mounted under `/api/*` prefixes: `/api/auth`, `/api/customers`, `/api/products`, `/api/stock`, `/api/challans`.
+6. Each route group applies `requireAuth` (JWT check) globally, then `requireRole(...)` per-route before the controller handler.
+
+**Prisma client setup (`src/config/prisma.ts`):**
+The Prisma client is initialized once using the `@prisma/adapter-pg` driver adapter (raw `pg` pool), then exported as a singleton. This avoids creating multiple connections per request and works correctly with the `DATABASE_URL` connection string.
+
+**TypeScript is compiled on-the-fly** in development using `tsx watch src/server.ts`. For production, `tsc` compiles to `dist/` and `node dist/server.js` is used as the start command.
+
 ### Request Flow
 1. React page calls API via `services/api.ts` (Axios instance with JWT header)
 2. `requireAuth` middleware validates the Bearer token
@@ -381,14 +398,32 @@ npm run dev
 
 ## Environment Variables
 
+### How Environment Variables Are Managed
+
+**Local development:**
+- Backend: create `backend/.env` (see template below). Loaded automatically by `import 'dotenv/config'` at server startup.
+- Frontend: create `frontend/.env`. Vite exposes any variable prefixed with `VITE_` to the browser bundle at build time.
+- **Neither `.env` file is committed to git.** Both are listed in `.gitignore`.
+
+**CI (GitHub Actions):**
+- Test environment variables are declared inline in the workflow YAML (non-secret values like `PORT` and `NODE_ENV`).
+- The `DATABASE_URL` in CI points to the PostgreSQL service container provisioned by the runner.
+- `JWT_SECRET` uses a throwaway test value defined directly in the workflow file - it is not a real secret.
+
+**Production:**
+- Backend environment variables are set through the hosting platform's dashboard (Render / Railway / VPS).
+- Frontend environment variables are set in the Vercel project settings as build-time variables.
+- **Secrets (JWT_SECRET, DATABASE_URL) are never stored in the repository.**
+
 ### Backend (`backend/.env`)
 
 | Variable | Required | Description |
 |----------|:--------:|-------------|
 | `DATABASE_URL` | Yes | PostgreSQL connection string |
-| `JWT_SECRET` | Yes | Token signing secret (min 32 chars) |
+| `JWT_SECRET` | Yes | Token signing secret (min 32 chars, never commit the real value) |
 | `PORT` | Yes | Server port (default: `5000`) |
 | `NODE_ENV` | Optional | `development` or `production` |
+| `FRONTEND_URL` | Optional | Extra CORS origins in production (comma-separated) |
 
 ### Frontend (`frontend/.env`)
 
