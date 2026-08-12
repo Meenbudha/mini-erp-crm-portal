@@ -3,7 +3,7 @@
 [![Backend CI](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/backend-ci.yml)
 [![Frontend CI](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/Meenbudha/mini-erp-crm-portal/actions/workflows/frontend-ci.yml)
 
-Lightweight, full-stack ERP/CRM system built with **Node.js + Express + Prisma + PostgreSQL** on the backend and **React + Vite + TypeScript** on the frontend. Covers customer management, product catalog, real-time stock inventory, and sales delivery challans â€” all with role-based access control.
+Lightweight, full-stack ERP/CRM system built with **Node.js + Express + Prisma + PostgreSQL** on the backend and **React + Vite + TypeScript** on the frontend. Covers customer management, product catalog, real-time stock inventory, and sales delivery challans - all with role-based access control.
 
 ---
 
@@ -11,8 +11,8 @@ Lightweight, full-stack ERP/CRM system built with **Node.js + Express + Prisma +
 
 | Service | URL |
 |---------|-----|
-| ðŸš€ Frontend (Vercel) | [https://mini-erp-crm-portal-zeta.vercel.app](https://mini-erp-crm-portal-zeta.vercel.app) |
-| âš¡ Backend API (Render) | [https://mini-erp-crm-backend-v4j5.onrender.com/api](https://mini-erp-crm-backend-v4j5.onrender.com/api) |
+| Frontend (Vercel) | [https://mini-erp-crm-portal-zeta.vercel.app](https://mini-erp-crm-portal-zeta.vercel.app) |
+| Backend API (Render) | [https://mini-erp-crm-backend-v4j5.onrender.com/api](https://mini-erp-crm-backend-v4j5.onrender.com/api) |
 
 ---
 
@@ -22,10 +22,10 @@ Use these pre-seeded accounts (created by `prisma/seed.ts`):
 
 | Role | Email | Password |
 |------|-------|----------|
-| ðŸ‘‘ Admin | `admin@erp.com` | `Password@123` |
-| ðŸ’¼ Sales | `sales@erp.com` | `Password@123` |
-| ðŸ“¦ Warehouse | `warehouse@erp.com` | `Password@123` |
-| ðŸ’° Accounts | `accounts@erp.com` | `Password@123` |
+| Admin | `admin@erp.com` | `Password@123` |
+| Sales | `sales@erp.com` | `Password@123` |
+| Warehouse | `warehouse@erp.com` | `Password@123` |
+| Accounts | `accounts@erp.com` | `Password@123` |
 
 ---
 
@@ -39,15 +39,15 @@ The system enforces **negative stock prevention at the service layer**, uses **P
 
 ## Features
 
-- ðŸ” **JWT Authentication** â€” Secure login with token-based session management
-- ðŸ‘¥ **Customer CRM** â€” Create, Edit, View, Follow-up notes, status tracking (LEAD â†’ ACTIVE â†’ INACTIVE)
-- ðŸ“¦ **Product Catalog** â€” SKU, Categories, Pricing, Min-stock threshold, Warehouse bin location
-- ðŸ“Š **Inventory** â€” Real-time Stock IN / OUT with full audit log and movement history
-- ðŸ§¾ **Sales Challans** â€” Full DRAFT â†’ CONFIRM (triggers stock deduction) â†’ CANCEL workflow
-- ðŸ›¡ **Negative Stock Prevention** â€” Enforced at service layer; excess OUT rejected with `409 Conflict`
-- ðŸ”„ **Live Dashboard** â€” Real-time metrics (customers, products, low stock alerts) with Refresh
-- ðŸ§ª **Automated Test Suite** â€” 30/30 backend integration tests covering all API flows
-- ðŸ“± **Responsive UI** â€” Mobile-first design, collapsible sidebar, horizontal table scroll on small screens
+- **JWT Authentication** - Secure login with token-based session management
+- **Customer CRM** - Create, Edit, View, Follow-up notes, status tracking (LEAD -> ACTIVE -> INACTIVE)
+- **Product Catalog** - SKU, Categories, Pricing, Min-stock threshold, Warehouse bin location
+- **Inventory** - Real-time Stock IN / OUT with full audit log and movement history
+- **Sales Challans** - Full DRAFT -> CONFIRM (triggers stock deduction) -> CANCEL workflow
+- **Negative Stock Prevention** - Enforced at service layer; excess OUT rejected with `409 Conflict`
+- **Live Dashboard** - Real-time metrics (customers, products, low stock alerts) with Refresh
+- **Automated Test Suite** - 30/30 backend integration tests covering all API flows
+- **Responsive UI** - Mobile-first design, collapsible sidebar, horizontal table scroll on small screens
 
 ---
 
@@ -81,20 +81,20 @@ The system enforces **negative stock prevention at the service layer**, uses **P
 
 ```
 React + TypeScript (Vite)
-        â”‚
-        â”‚  REST API  (Axios + JWT Bearer token)
-        â–¼
+        |
+        |  REST API  (Axios + JWT Bearer token)
+        v
 Node.js + Express + TypeScript
-        â”‚
-        â”œâ”€â”€ requireAuth     (JWT validation middleware)
-        â”œâ”€â”€ requireRole     (role-based guard middleware)
-        â”œâ”€â”€ Zod Validators  (request body validation)
-        â””â”€â”€ Controllers â†’ Services (business logic)
-                â”‚
-                â–¼
+        |
+        |-- requireAuth     (JWT validation middleware)
+        |-- requireRole     (role-based guard middleware)
+        |-- Zod Validators  (request body validation)
+        +-- Controllers -> Services (business logic)
+                |
+                v
             Prisma ORM
-                â”‚
-                â–¼
+                |
+                v
           PostgreSQL Database
 ```
 
@@ -113,17 +113,17 @@ Node.js + Express + TypeScript
 ### Entity Relationship Overview
 
 ```
-User â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€ StockMovement
-              â”œâ”€â”€â”€â”€ CustomerFollowup
-              â””â”€â”€â”€â”€ Challan
+User ----------+---- StockMovement
+              +---- CustomerFollowup
+              +---- Challan
 
-Customer â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€ CustomerFollowup
-              â””â”€â”€â”€â”€ Challan
+Customer -----+---- CustomerFollowup
+              +---- Challan
 
-Product â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€ StockMovement
-              â””â”€â”€â”€â”€ ChallanItem
+Product ------+---- StockMovement
+              +---- ChallanItem
 
-Challan â”€â”€â”€â”€â”€â”€â””â”€â”€â”€â”€ ChallanItem
+Challan ------+---- ChallanItem
 ```
 
 ### Models
@@ -135,7 +135,7 @@ Challan â”€â”€â”€â”€â”€â”€â””â”€â”€
 | `name` | String | Display name |
 | `email` | String (unique) | Login identifier |
 | `passwordHash` | String | bcrypt hash |
-| `role` | Enum | `ADMIN \| SALES \| WAREHOUSE \| ACCOUNTS` |
+| `role` | Enum | `ADMIN`, `SALES`, `WAREHOUSE`, `ACCOUNTS` |
 
 #### `Customer`
 | Field | Type | Notes |
@@ -146,8 +146,8 @@ Challan â”€â”€â”€â”€â”€â”€â””â”€â”€
 | `email` | String? | Optional |
 | `businessName` | String? | Company name |
 | `gstNumber` | String? | GST registration |
-| `customerType` | Enum | `RETAIL \| WHOLESALE \| DISTRIBUTOR` |
-| `status` | Enum | `LEAD \| ACTIVE \| INACTIVE` |
+| `customerType` | Enum | `RETAIL`, `WHOLESALE`, `DISTRIBUTOR` |
+| `status` | Enum | `LEAD`, `ACTIVE`, `INACTIVE` |
 | `followUpDate` | DateTime? | Next follow-up reminder |
 | `notes` | String? | Free-text notes |
 
@@ -167,27 +167,27 @@ Challan â”€â”€â”€â”€â”€â”€â””â”€â”€
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | UUID | Primary key |
-| `productId` | FK â†’ Product | |
+| `productId` | FK -> Product | |
 | `quantity` | Int | Units moved |
-| `movementType` | Enum | `IN \| OUT` |
+| `movementType` | Enum | `IN`, `OUT` |
 | `reason` | String | Free-text audit note |
-| `createdBy` | FK â†’ User | Who recorded it |
+| `createdBy` | FK -> User | Who recorded it |
 
 #### `Challan`
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | UUID | Primary key |
 | `challanNumber` | String (unique) | Auto-generated reference |
-| `customerId` | FK â†’ Customer | |
+| `customerId` | FK -> Customer | |
 | `totalQuantity` | Int | Sum of all items |
-| `status` | Enum | `DRAFT \| CONFIRMED \| CANCELLED` |
-| `createdBy` | FK â†’ User | |
+| `status` | Enum | `DRAFT`, `CONFIRMED`, `CANCELLED` |
+| `createdBy` | FK -> User | |
 
-#### `ChallanItem` *(product snapshot)*
+#### `ChallanItem` (product snapshot)
 | Field | Type | Notes |
 |-------|------|-------|
-| `challanId` | FK â†’ Challan | |
-| `productId` | FK â†’ Product | |
+| `challanId` | FK -> Challan | |
+| `productId` | FK -> Product | |
 | `productName` | String | Snapshot at time of creation |
 | `productSku` | String | Snapshot |
 | `unitPrice` | Decimal(12,2) | Snapshot |
@@ -201,22 +201,22 @@ Challan â”€â”€â”€â”€â”€â”€â””â”€â”€
 
 | Action | Admin | Sales | Warehouse | Accounts |
 |--------|:-----:|:-----:|:---------:|:--------:|
-| Login | âœ… | âœ… | âœ… | âœ… |
-| View Dashboard | âœ… | âœ… | âœ… | âœ… |
-| View Customers | âœ… | âœ… | âŒ | âœ… |
-| Create / Edit Customer | âœ… | âœ… | âŒ | âŒ |
-| Delete Customer | âœ… | âŒ | âŒ | âŒ |
-| Add Follow-up Note | âœ… | âœ… | âŒ | âŒ |
-| View Products | âœ… | âœ… | âœ… | âœ… |
-| Create / Edit Product | âœ… | âŒ | âœ… | âŒ |
-| Delete Product | âœ… | âŒ | âŒ | âŒ |
-| Stock IN | âœ… | âŒ | âœ… | âŒ |
-| Stock OUT | âœ… | âŒ | âœ… | âŒ |
-| View Stock Movements | âœ… | âŒ | âœ… | âœ… |
-| View Challans | âœ… | âœ… | âœ… | âœ… |
-| Create Challan (DRAFT) | âœ… | âœ… | âŒ | âŒ |
-| Confirm Challan â†’ stock OUT | âœ… | âœ… | âœ… | âŒ |
-| Cancel Challan | âœ… | âœ… | âŒ | âŒ |
+| Login | Yes | Yes | Yes | Yes |
+| View Dashboard | Yes | Yes | Yes | Yes |
+| View Customers | Yes | Yes | No | Yes |
+| Create / Edit Customer | Yes | Yes | No | No |
+| Delete Customer | Yes | No | No | No |
+| Add Follow-up Note | Yes | Yes | No | No |
+| View Products | Yes | Yes | Yes | Yes |
+| Create / Edit Product | Yes | No | Yes | No |
+| Delete Product | Yes | No | No | No |
+| Stock IN | Yes | No | Yes | No |
+| Stock OUT | Yes | No | Yes | No |
+| View Stock Movements | Yes | No | Yes | Yes |
+| View Challans | Yes | Yes | Yes | Yes |
+| Create Challan (DRAFT) | Yes | Yes | No | No |
+| Confirm Challan (stock OUT) | Yes | Yes | Yes | No |
+| Cancel Challan | Yes | Yes | No | No |
 
 ---
 
@@ -237,7 +237,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 | Method | Route | Description | Auth |
 |--------|-------|-------------|------|
-| `POST` | `/api/auth/login` | Login â€” returns JWT + user info | Public |
+| `POST` | `/api/auth/login` | Login - returns JWT + user info | Public |
 
 **Request body:**
 ```json
@@ -306,7 +306,7 @@ Authorization: Bearer <JWT_TOKEN>
 | `GET` | `/api/challans` | List all challans | Admin, Sales, Warehouse, Accounts |
 | `GET` | `/api/challans/:id` | Challan detail + items | Admin, Sales, Warehouse, Accounts |
 | `POST` | `/api/challans` | Create DRAFT challan | Admin, Sales |
-| `POST` | `/api/challans/:id/confirm` | Confirm â†’ deducts stock (atomic) | Admin, Sales, Warehouse |
+| `POST` | `/api/challans/:id/confirm` | Confirm - deducts stock (atomic) | Admin, Sales, Warehouse |
 | `POST` | `/api/challans/:id/cancel` | Cancel DRAFT challan | Admin, Sales |
 
 **Create challan request body:**
@@ -385,16 +385,16 @@ npm run dev
 
 | Variable | Required | Description |
 |----------|:--------:|-------------|
-| `DATABASE_URL` | âœ… | PostgreSQL connection string |
-| `JWT_SECRET` | âœ… | Token signing secret (min 32 chars) |
-| `PORT` | âœ… | Server port (default: `5000`) |
+| `DATABASE_URL` | Yes | PostgreSQL connection string |
+| `JWT_SECRET` | Yes | Token signing secret (min 32 chars) |
+| `PORT` | Yes | Server port (default: `5000`) |
 | `NODE_ENV` | Optional | `development` or `production` |
 
 ### Frontend (`frontend/.env`)
 
 | Variable | Required | Description |
 |----------|:--------:|-------------|
-| `VITE_API_URL` | âœ… | Full URL to backend API root (e.g. `http://localhost:5000/api`) |
+| `VITE_API_URL` | Yes | Full URL to backend API root (e.g. `http://localhost:5000/api`) |
 
 ---
 
@@ -404,7 +404,7 @@ Supports three deployment targets. See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for 
 
 | Option | Platform | Notes |
 |--------|----------|-------|
-| A | Railway.app | Recommended â€” managed PostgreSQL, single platform |
+| A | Railway.app | Recommended - managed PostgreSQL, single platform |
 | B | Render.com (backend) + Vercel (frontend) | Current live setup |
 | C | VPS / Ubuntu with PM2 + Nginx | Self-hosted, production-grade |
 
@@ -430,7 +430,7 @@ You can test the API manually using Postman or any HTTP client.
 **Base URL:** `http://localhost:5000/api`
 
 **Quick setup:**
-1. `POST /api/auth/login` â†’ copy the `token` from the response
+1. `POST /api/auth/login` - copy the `token` from the response
 2. Add `Authorization: Bearer <token>` header on all subsequent requests
 3. Use the [API Documentation](#api-documentation) tables above for routes and request bodies
 
@@ -469,10 +469,10 @@ curl -X POST http://localhost:5000/api/stock/in \
 
 ### Challan Confirmation (Atomic Transaction)
 When a challan is confirmed, the backend executes a **Prisma transaction** that:
-1. Verifies the challan is in `DRAFT` status â€” rejects with `400` if already confirmed/cancelled
+1. Verifies the challan is in `DRAFT` status - rejects with `400` if already confirmed/cancelled
 2. For each item in the challan, checks that `currentStock >= quantity`
-3. If any product has insufficient stock â†’ the entire transaction is rolled back (`409 Conflict`)
-4. If all checks pass â†’ deducts stock from all products and creates `StockMovement` records (type `OUT`) atomically
+3. If any product has insufficient stock - the entire transaction is rolled back (`409 Conflict`)
+4. If all checks pass - deducts stock from all products and creates `StockMovement` records (type `OUT`) atomically
 5. Updates challan status to `CONFIRMED`
 
 ### Negative Stock Prevention
@@ -495,7 +495,7 @@ When a challan is created, `productName`, `productSku`, and `unitPrice` are copi
 - One user account per role is sufficient for demo purposes; the system supports unlimited users per role.
 - `challanNumber` is generated as a unique string at creation time; no configurable prefix or sequential numbering is needed.
 - GST number and business name are optional fields; no GST computation or tax calculation is implemented.
-- All monetary values are stored as `Decimal(12, 2)` â€” sufficient for most currencies and quantity ranges.
+- All monetary values are stored as `Decimal(12, 2)` - sufficient for most currencies and quantity ranges.
 - Frontend environment assumes a single `VITE_API_URL`; multi-tenant or multi-region setups are out of scope.
 - Password policy (`Password@123` minimum complexity) is enforced only at seed level; no self-registration UI is provided.
 
@@ -516,31 +516,35 @@ When a challan is created, `productName`, `productSku`, and `unitPrice` are copi
 
 ```
 mini-erp-crm/
-â”œâ”€â”€ backend/
-â”‚   â”œâ”€â”€ prisma/
-â”‚   â”‚   â”œâ”€â”€ schema.prisma       # DB models: User, Customer, Product, StockMovement, Challan, ChallanItem
-â”‚   â”‚   â””â”€â”€ seed.ts             # Seeds 4 test users (Admin, Sales, Warehouse, Accounts)
-â”‚   â””â”€â”€ src/
-â”‚       â”œâ”€â”€ app.ts              # Express app, CORS, route mounting
-â”‚       â”œâ”€â”€ server.ts           # HTTP server entry point
-â”‚       â”œâ”€â”€ config/             # Prisma client singleton
-â”‚       â”œâ”€â”€ controllers/        # Route handlers (auth, customer, product, stock, challan)
-â”‚       â”œâ”€â”€ services/           # Business logic (stock deduction, challan transactions)
-â”‚       â”œâ”€â”€ routes/             # Express routers + role middleware binding
-â”‚       â”œâ”€â”€ middleware/         # requireAuth (JWT), requireRole (RBAC)
-â”‚       â”œâ”€â”€ validators/         # Zod schemas for request body validation
-â”‚       â”œâ”€â”€ types/              # TypeScript interfaces and Express augmentations
-â”‚       â””â”€â”€ tests/
-â”‚           â””â”€â”€ system_test.ts  # 30-test automated end-to-end suite
-â””â”€â”€ frontend/
-    â””â”€â”€ src/
-        â”œâ”€â”€ App.tsx             # Router setup, ProtectedRoute
-        â”œâ”€â”€ pages/              # Dashboard, Login, Customers, Products, Inventory, Challans, Settings
-        â”œâ”€â”€ components/         # Sidebar, Layout, ProtectedRoute, Loading
-        â”œâ”€â”€ context/            # AuthContext (JWT decode, user state, login/logout)
-        â”œâ”€â”€ services/           # Axios API client with JWT interceptor
-        â”œâ”€â”€ types/              # TypeScript interfaces (Customer, Product, Challan, etc.)
-        â””â”€â”€ tests/              # Vitest + Testing Library component tests
+|-- .github/
+|   +-- workflows/
+|       |-- backend-ci.yml    # TypeScript check + 30-test integration suite (PostgreSQL service)
+|       +-- frontend-ci.yml   # TypeScript check + lint + Vitest + production build
+|-- backend/
+|   |-- prisma/
+|   |   |-- schema.prisma     # DB models: User, Customer, Product, StockMovement, Challan, ChallanItem
+|   |   +-- seed.ts           # Seeds 4 test users (Admin, Sales, Warehouse, Accounts)
+|   +-- src/
+|       |-- app.ts            # Express app, CORS, route mounting
+|       |-- server.ts         # HTTP server entry point
+|       |-- config/           # Prisma client singleton
+|       |-- controllers/      # Route handlers (auth, customer, product, stock, challan)
+|       |-- services/         # Business logic (stock deduction, challan transactions)
+|       |-- routes/           # Express routers + role middleware binding
+|       |-- middleware/       # requireAuth (JWT), requireRole (RBAC)
+|       |-- validators/       # Zod schemas for request body validation
+|       |-- types/            # TypeScript interfaces and Express augmentations
+|       +-- tests/
+|           +-- system_test.ts  # 30-test automated end-to-end suite
++-- frontend/
+    +-- src/
+        |-- App.tsx           # Router setup, ProtectedRoute
+        |-- pages/            # Dashboard, Login, Customers, Products, Inventory, Challans, Settings
+        |-- components/       # Sidebar, Layout, ProtectedRoute, Loading
+        |-- context/          # AuthContext (JWT decode, user state, login/logout)
+        |-- services/         # Axios API client with JWT interceptor
+        |-- types/            # TypeScript interfaces (Customer, Product, Challan, etc.)
+        +-- tests/            # Vitest + Testing Library component tests
 ```
 
 ---
@@ -558,14 +562,30 @@ npx tsx src/tests/system_test.ts
 
 | # | Test Group | Tests |
 |---|------------|-------|
-| 12A | **Authentication (7)** | Invalid password â†’ 401, All 4 roles login, No-token â†’ 401 |
-| 12B | **Role/Permission (2)** | Sales blocked from Stock IN (403), Warehouse blocked from Customer create (403) |
-| 12C | **Customer CRUD (6)** | Create, Fetch by ID, Update, field validation |
-| 12D | **Product CRUD (2)** | Create, Duplicate SKU blocked (400) |
-| 12E | **Inventory (7)** | Stock IN (+50 units), Stock OUT (-30 units), Excess OUT rejected (409), Audit log |
-| 12F | **Challan Workflow (4)** | DRAFT created, Confirm â†’ CONFIRMED, Cancel â†’ CANCELLED |
-| 12G | **Transaction Safety (2)** | Stock deducted on confirm, Double-confirm blocked (400) |
-| 12H | **Validation (2)** | Invalid email â†’ 400, Negative quantity â†’ 400 |
+| 12A | Authentication (7) | Invalid password -> 401, All 4 roles login, No-token -> 401 |
+| 12B | Role/Permission (2) | Sales blocked from Stock IN (403), Warehouse blocked from Customer create (403) |
+| 12C | Customer CRUD (6) | Create, Fetch by ID, Update, field validation |
+| 12D | Product CRUD (2) | Create, Duplicate SKU blocked (400) |
+| 12E | Inventory (7) | Stock IN (+50 units), Stock OUT (-30 units), Excess OUT rejected (409), Audit log |
+| 12F | Challan Workflow (4) | DRAFT created, Confirm -> CONFIRMED, Cancel -> CANCELLED |
+| 12G | Transaction Safety (2) | Stock deducted on confirm, Double-confirm blocked (400) |
+| 12H | Validation (2) | Invalid email -> 400, Negative quantity -> 400 |
+
+---
+
+## GitHub Actions CI
+
+The project has two automated workflows that run on every push/PR to `main`:
+
+### backend-ci.yml
+1. **TypeScript Check** - `npx tsc --noEmit`
+2. **Integration Tests** - Spins up PostgreSQL 16 container, runs migrations, seeds DB, starts server, runs all 30 tests
+
+### frontend-ci.yml
+1. **TypeScript Check** - `npx tsc --noEmit`
+2. **Lint** - `npm run lint` (oxlint)
+3. **Unit Tests** - `npm test` (Vitest + Testing Library)
+4. **Build** - `npm run build` - production bundle check, uploads `dist/` as artifact
 
 ---
 
@@ -588,7 +608,7 @@ cd frontend && npm test
 cd backend && npx tsc --noEmit
 cd frontend && npx tsc --noEmit
 
-# Prisma Studio â€” GUI database explorer
+# Prisma Studio - GUI database explorer
 cd backend && npx prisma studio
 
 # Generate Prisma client after schema changes
@@ -605,8 +625,8 @@ cd backend && npx prisma migrate deploy
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feat/your-feature`
 3. Commit with a descriptive message
-4. Open a PR â€” describe any migration or `.env` changes
+4. Open a PR - describe any migration or `.env` changes
 
 ---
 
-Mini ERP/CRM â€” Built with â¤ï¸ using Node.js, Express, Prisma, React, Vite, TypeScript.
+Mini ERP/CRM - Built with Node.js, Express, Prisma, React, Vite, TypeScript.
